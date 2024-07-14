@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block head %}
+    {% endblock %}
+    <title>{% block title %}JudoGear{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <div class="row">
+            <div class="header-top">
+                <div class="logo">
+                    <a href="https://www.tbceducation.ge/">
+                        <img src="{{ url_for('static', filename='images/tbc.png') }}" alt="logo">
+                    </a>
+                </div>
+                <div class="nav-panel">
+                    <div class="search">
+                        <input type="text" placeholder="Search for desire">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+                <div class="nav-group">
+                    <ul>
+                        <li><a href="#"><i class="fa-solid fa-comment"></i></a></li>
+                        <li><a href="#"><i class="fa-solid fa-list"></i></a></li>
+                        <li class="openbtn">
+                            <a href="{{ url_for('register') }}">
+                                <i class="fa-solid fa-user"></i>
+                                <span>Sign in/up</span>
+                            </a>
+                        </li>
+                        <li><a href="#"><i class="fa-solid fa-ellipsis-vertical"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    {% block content %}
+    <!-- Content will be inserted here -->
+    {% endblock %}
+
+    <footer>
+        <div class="container-footer">
+            <ul>
+                <li><a target="_blank" href="/">home</a></li>
+                <li><a target="_blank" href="https://www.tbceducation.ge/">about us</a></li>
+                <li><a target="_blank" href="https://www.tbceducation.ge/">terms of use</a></li>
+                <li><a target="_blank" href="https://www.tbceducation.ge/">privacy policy</a></li>
+                <li><a target="_blank" href="https://www.tbceducation.ge/">help</a></li>
+                <li><a target="_blank" href="https://www.tbceducation.ge/">contact us</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/75f3cd98d9.js" crossorigin="anonymous"></script>
+</body>
+</html>

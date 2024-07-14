@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="register">
+    <div class="container">
+        <div class="collumn">
+            <form method="POST" action="{{ url_for('register') }}">
+                {{ form.hidden_tag() }}
+                <h2 class="signup">
+                    Sign up
+                    <p class="login-text">Already have an account?<br><a class="login" href="{{ url_for('login') }}"><i class="fa-solid fa-user login-logo"></i>Log in</a></p>
+                </h2>
+                <span class="required">*required.</span>
+                
+                <!-- Display flash messages for errors or success -->
+                {% for message in get_flashed_messages(with_categories=True) %}
+                    <div class="alert alert-{{ message[0] }}">
+                        {{ message[1] }}
+                    </div>
+                {% endfor %}
+                
+                <div class="form-group">
+                    {{ form.username(class_='form-control', placeholder='Username') }}
+                </div>
+                <span class="required">*required.</span>
+                <div class="form-group">
+                    {{ form.email(class_='form-control', placeholder='Email') }}
+                </div>
+                <span class="required">*required.</span>
+                <div class="form-group">
+                    {{ form.password(class_='form-control', placeholder='Password') }}
+                </div>
+                <span class="required">*required.</span>
+                <div class="form-group">
+                    {{ form.confirm_password(class_='form-control', placeholder='Confirm Password') }}
+                </div>
+                <div class="form-group check">
+                    {{ form.receive_updates(class_='form-check-input') }}  <!-- Fixed checkbox rendering -->
+                    <label for="receive_updates">Receive news and updates by email</label>
+                </div>
+                <div class="form-group check">
+                    {{ form.terms(class_='form-check-input') }}  <!-- Fixed checkbox rendering -->
+                    <label for="terms">I agree to the terms and privacy policy.</label>
+                </div>
+                <div class="buttons">
+                    <button type="submit" class="blob-btn">
+                        Sign up
+                        <span class="blob-btn__inner">
+                            <span class="blob-btn__blobs">
+                                <span class="blob-btn__blob"></span>
+                                <span class="blob-btn__blob"></span>
+                                <span class="blob-btn__blob"></span>
+                                <span class="blob-btn__blob"></span>
+                            </span>
+                        </span>
+                    </button>
+                    <br/>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <defs>
+                            <filter id="goo">
+                                <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
+                                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7" result="goo"></feColorMatrix>
+                                <feBlend in2="goo" in="SourceGraphic" result="mix"></feBlend>
+                            </filter>
+                        </defs>
+                    </svg>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<style>
+    .login {
+        text-decoration: none;
+        cursor: pointer;
+        color: inherit;
+    }
+    .login-logo {
+        font-size: 25px; 
+        padding: 15px 5px 0 0;
+        color: #686c6e;
+    }
+    .login:hover .login-logo {
+        color: #68edff;
+    }
+    .login-text {
+        font-size: 20px;
+        padding-top: 20px;
+    }
+    .signup {
+        display: flex; 
+        flex-direction: column; 
+        text-align: center;
+    }
+    .danger {
+        
+    }
+    .alert{
+        font-weight: bold;
+        color: #fff;
+        margin: 10px auto 10px 3px;
+        font-size: 18px;
+        text-align: center;
+        -webkit-animation: pulsate 0.7s linear infinite;
+        animation: pulsate 0.7s linear infinite;
+    }
+    @keyframes pulsate{50%{color:#fff;text-shadow:0 -1px #cd4342,0 0 5px #cd4342,0 0 8px#cd4342;}
+    }
+</style>
+{% endblock %}

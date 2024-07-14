@@ -1,0 +1,229 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+    <title>JudoGear</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <div class="row">
+            <div class="header-top">
+                <div class="logo">
+                    <a target="_blank" href="https://www.tbceducation.ge/">
+                        <img src="{{ url_for('static', filename='images/tbc.png') }}" alt="logo">
+                    </a>
+                </div>
+                <div class="nav-panel">
+                    <div class="search">
+                        <input type="text" placeholder="Search for desire">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+                <div class="nav-group">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="fa-solid fa-comment"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa-solid fa-list"></i>
+                            </a>
+                        </li>
+                        {% if current_user.is_authenticated %}
+                        <li class="openbtn">
+                            <a href="/logout">
+                                <i class="fa-solid fa-user"></i>
+                                <span>Log out</span>
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="openbtn">
+                            <a target="_blank" href="/register">
+                                <i class="fa-solid fa-user"></i>
+                                <span>Sign in/up</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <a href="#">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div id="carouselExampleDark" class="carousel carousel-dark slide">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div id="size" class="carousel-item active" data-bs-interval="10000">
+                <img src="{{ url_for('static', filename='images/j2.jpeg') }}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>The better the equipment</h5>
+                  <p>the better the result</p>
+                </div>
+              </div>
+              <div id="size" class="carousel-item" data-bs-interval="2000">
+                <img src="{{ url_for('static', filename='images/j1.webp') }}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>The better the equipment</h5>
+                  <p>the better the result</p>
+                </div>
+              </div>
+              <div id="size" class="carousel-item">
+                <img src="{{ url_for('static', filename='images/j3.webp') }}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>The better the equipment</h5>
+                  <p>the better the result</p>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+    </section>
+    <section>
+        <div class="shipment-text">
+            <h2>Best equipment for you is on this page</h2>
+            <p>Choice kimono and press on "order" button<br> shipment to any county is available</p>
+        </div>
+    </section>
+    <main>
+        <div class="container">
+            <div class="left-container">
+                <div class="image-carousel">
+                    <div class="container cards cards-new">
+                        {% for product in products_top_home %}
+                        <div class="product mizuno adidas hill">
+                            <div class="top-container">
+                                <img src="{{ product['image'] }}" alt="{{ product['name'] }}">
+                            </div>
+                            <div class="bottom-container">
+                                <h3>{{ product['name'] }}</h3>
+                                <p>{{ product['text'] }}</p>
+                                {% if current_user.is_authenticated %}
+                                    <form target="_blank" action="{{ url_for('product', product_id=product['id']) }}">
+                                        <button type="submit" class="btn btn-primary">Order for {{ product['price'] }}</button>
+                                    </form>
+                                {% else %}
+                                    <form target="_blank" action="/register">
+                                        <button type="submit" class="btn btn-primary">Sign in and Order</button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </main>
+    <section>
+        <div class="container-new">
+            <div class="information">
+                <div class="information-left">
+                    <h2>The spirit of the sport</h2>
+                    <p>Beyond being one of the most prestigious and universal Olympic disciplines, Judo is more than sport - it is also an acknowledged educational tool and a way of life enriched by a moral code and ethic values that have firmly withstood the trial of life. Owing to those values and ethical approach that are inscribed in the DNA of the sport, the International Judo Federation is against any kind of cheating. A clean and fair play sport is important to promote a better society, which can offer a direction in life to the young generations. Respect, honesty, self-control, friendship, courtesy, honor, courage and modesty - the eight values of the judo moral code are taught to every judoka from the first time they enter a dojo. </p>
+                </div>
+                <div class="information-right">
+                    <h2>History</h2>
+                    <p>In May 1882 Jigoro Kano was inspired by traditional forms of combat to create a method of physical, intellectual and moral education, which he named judo.
+                        Initially considered as a self-defence system, judo is step by step recognized for its educational value, its benefits for the development of the body and the character.Jigoro's dream of the "internationalization of judo" came true at the Tokyo Olympics in 1964. Only men's judo was recognized as an official Olympic event and bouts were held by weight class. Women's judo was introduced as a demonstration event at the 1988 Seoul Olympics and was added to the official program at the Barcelona Olympics in 1992.
+                        Currently (as of March 2021), 204 countries and regions are members of the International Judo Federation.
+                </div>
+            </div>
+        </div>
+    </section>
+    <main>
+      <div class="container cards cards-bottom">
+        {% for product in products_bottom %}
+        <div class="product mizuno adidas hill ">
+            <div class="top-container">
+                <img src="{{product['image']}}" alt="belt">
+            </div>
+            <div class="bottom-container">
+                <h3>{{ product['name'] }}</h3>
+                <p>{{ product['text'] }}</p>
+                {% if current_user.is_authenticated %}
+                {% if product['name'] == 'Mizuno belt' %}
+                <button id="button" type="button" class="btn btn-primary">
+                    <a class="order-link" target="_blank" href="{{ url_for('mizuno') }}">Order for {{ product['price'] }}</a>
+                </button>
+                {% elif product['name'] == 'Adidas belt' %}
+                <button id="button" type="button" class="btn btn-primary">
+                    <a class="order-link" target="_blank" href="{{ url_for('adidas') }}">Order for {{ product['price'] }}</a>
+                </button>
+                {% elif product['name'] == 'KuSakura belt' %}
+                <button id="button" type="button" class="btn btn-primary">
+                    <a class="order-link" target="_blank" href="{{ url_for('kusakura') }}">Order for {{ product['price'] }}</a>
+                </button>
+                {% endif %}
+                {% else %}
+                <button id="button" type="button" class="btn btn-primary">
+                    <span><a class="order-link" href="/register">Sign up and Order</a></span>
+                </button>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+  </main>
+    <footer>
+        <div class="container-footer">
+            <ul>
+                <li><a target="_blank" href="/">home</a></li>
+                <li><a target="_blank" href="https://www.tbceducation.ge/">about us</a></li>
+                <li><a target="_blank" href="https://www.tbceducation.ge/">terms of use</a></li>
+                <li><a target="_blank" href="https://www.tbceducation.ge/">privacy policy</a></li>
+                <li><a target="_blank" href="https://www.tbceducation.ge/">help</a></li>
+                <li><a target="_blank" href="https://www.tbceducation.ge/">contact us</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/75f3cd98d9.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+        #button {
+            width: 150px;
+        }
+        #size {   
+            height: 500px;
+        }
+        #size p {
+            color: white;
+            font-size: 16px;
+            font-weight: 400;  
+        }
+        #size h5 {
+            color: white;  
+        }
+        #carousel-image {
+            width: 300px;
+        }
+        .order-link {
+          opacity: 1;
+          color: white;
+          text-decoration: none;
+        }
+        footer {
+            margin-top: 90px;
+        }
+    </style>
+</body>
+</html>

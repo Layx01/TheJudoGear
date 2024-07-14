@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+JudoGear - {{ product['name'] }}
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/product_kimono.css') }}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container">
+        <div class="left-container">
+            <div class="image-carousel">
+                <img src="{{ url_for('static', filename=product['image']) }}" alt="{{ product['name'] }}">
+            </div>
+        </div>
+        <div class="right-container">
+            <div class="title">
+                <h2>{{ product['name'] }}</h2>
+            </div>
+            <div class="description">
+                <p>
+                    Introducing the {{ product['name'] }} IJF Approved Judo kimono – designed for serious judo practitioners.
+                </p>
+                <ul>
+                    <li>IJF Approved: Meets International Judo Federation standards.</li>
+                    <li>Durable Material: Made from a strong cotton-polyester blend.</li>
+                    <li>Comfort Fit: Available in multiple sizes for a perfect fit.</li>
+                    <li>Reinforced Stitching: Built to withstand intense training and competition.</li>
+                </ul>
+                <p class="p-bottom">
+                    Elevate your judo practice with the {{ product['name'] }} IJF Approved Kimono.
+                </p>
+                <form target="_blank" action="{{ url_for('product', product_id=product['id']) }}">
+                    <button type="submit" class="btn btn-primary">Order for {{ product['price'] }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<style>
+    p{
+        margin-bottom: 10px;
+    }
+    li {
+        margin-bottom: 10px;
+    }
+    .btn {
+        height: 40px;
+        width: 240px;
+        color: white;
+        background-color: black;
+        text-align: center;
+        margin-top: 30px;
+    }
+    .btn:hover {
+        background-color: rgb(51, 50, 50);
+        top: 15px;
+        transform: translate(5%, 20%);;
+    }
+</style>
+{% endblock %}
